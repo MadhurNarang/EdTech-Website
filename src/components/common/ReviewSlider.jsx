@@ -35,12 +35,32 @@ function ReviewSlider() {
 
   // console.log(reviews)
 
+  const [maxWidth, setMaxWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+
+    const updateMaxWidth = () => {
+      setMaxWidth(window.innerWidth);
+    };
+
+    // Add event listener to update max width on window resize
+    window.addEventListener('resize', updateMaxWidth);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', updateMaxWidth);
+    };
+
+  }, []);
+
+  const slidesPerView = maxWidth >= 600 ? 3 : 2;
+
   return (
     <div className="text-white">
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
         <Swiper
-          slidesPerView={2}
-          spaceBetween={25}
+          slidesPerView={slidesPerView}
+          spaceBetween={30}
           loop={true}
           freeMode={true}
           autoplay={{
@@ -48,12 +68,12 @@ function ReviewSlider() {
             disableOnInteraction: false,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          className="w-[100%]"
         >
           {reviews.map((review, i) => {
             return (
               <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] h-[190px] text-richblack-25 ">
                   <div className="flex items-center gap-4">
                     <img
                       src={
@@ -71,14 +91,7 @@ function ReviewSlider() {
                       </h2>
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25">
-                    {review?.review.split(" ").length > truncateWords
-                      ? `${review?.review
-                          .split(" ")
-                          .slice(0, truncateWords)
-                          .join(" ")} ...`
-                      : `${review?.review}`}
-                  </p>
+
                   <div className="flex items-center gap-2 ">
                     <h3 className="font-semibold text-yellow-100">
                       {review.rating.toFixed(1)}
@@ -93,6 +106,16 @@ function ReviewSlider() {
                       fullIcon={<FaStar />}
                     />
                   </div>
+
+                  <p className="font-medium text-richblack-25">
+                    {review?.review.split(" ").length > truncateWords
+                      ? `${review?.review
+                          .split(" ")
+                          .slice(0, truncateWords)
+                          .join(" ")} ...`
+                      : `${review?.review}`}
+                  </p>
+                  
                 </div>
               </SwiperSlide>
             )
