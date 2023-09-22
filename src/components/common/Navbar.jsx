@@ -55,7 +55,7 @@ function Navbar() {
         {/* Logo */}
         <Link to="/">
 {/*           <img src={logo} alt="Logo" width={120} height={32} loading="lazy" /> */}
-              <p className = "text-yellow-25 hidden md:block width={120} height={32}">IndiaNotion</p>
+              <p className = "text-yellow-25 hidden md:block width={120} height={32} font-2xl font-bold">IndiaNotion</p>
         </Link>
 
         {/* Navigation links */}
