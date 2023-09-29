@@ -35,14 +35,15 @@ const ContactDetails = () => {
             className="flex flex-col gap-[2px] p-3 text-sm text-richblack-200"
             key={i}
           >
-            <div className="flex flex-row items-center gap-3">
-              <Icon size={25} />
-              <h1 className="text-lg font-semibold text-richblack-5">
-                {ele?.heading}
-              </h1>
-            </div>
-            <p className="font-medium">{ele?.description}</p>
-            <p className="font-semibold">{ele?.details}</p>
+                <div className="flex flex-row items-center gap-3">
+                  <Icon size={25} />
+                    <h1 className="text-lg font-semibold text-richblack-5">
+                       {ele?.heading}
+                    </h1>
+                </div>
+                 <p className="font-medium">{ele?.description}</p>
+                
+                   <p className="font-semibold">{ele?.details}</p>
           </div>
         )
       })}
